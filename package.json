@@ -1,0 +1,12 @@
+{
+  "name": "react-typescript",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Bootstrap app for React with TypeScript",
+  "repository": "https://github.com/terranmoccasin/react-typescript",
+  "dependencies": {},
+  "author": "Michael Quinn Hwang",
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  }
+}
