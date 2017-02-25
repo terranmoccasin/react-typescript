@@ -5,6 +5,7 @@
   "description": "Bootstrap app for React with TypeScript",
   "repository": "https://github.com/terranmoccasin/react-typescript",
   "dependencies": {
+    "express": "^4.14.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
