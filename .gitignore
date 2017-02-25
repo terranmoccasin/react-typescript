@@ -1,3 +1,5 @@
 react-typescript.iml
 node_modules/
+typings/
 .idea/
+.vscode/
