@@ -1,6 +1,9 @@
 import * as React from "react";
 
-interface HelloProps { compiler: string; framework: string; }
+interface HelloProps {
+  compiler: string;
+  framework: string;
+}
 
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the 'undefined' type.
