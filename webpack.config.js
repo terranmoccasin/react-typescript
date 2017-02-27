@@ -2,7 +2,7 @@ module.exports = {
   entry: "./src/app.tsx",
   output: {
     filename: "bundle.js",
-    path: __dirname + "/dist/js"
+    path: __dirname + "./dist/js"
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -24,6 +24,9 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
         exclude: /node_modules/,
+        query: {
+          configFileName: 'tsconfig.client.json'
+        }
       }
     ],
   },
