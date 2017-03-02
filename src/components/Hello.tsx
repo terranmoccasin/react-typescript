@@ -5,20 +5,37 @@ import {changeMessage} from '../actions/SampleActions';
 interface HelloProps {
   compiler: string
   framework: string;
-  onClick?: () => void;
+  changeMessage?: (message: string) => void;
 }
 
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the 'undefined' type.
 class Hello extends React.Component<HelloProps, undefined> {
+  constructor(props: HelloProps) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  // Mapping ref types.
+  // See http://stackoverflow.com/questions/33796267/how-to-use-refs-in-react-with-typescript
+  refs: {
+    [key: string]: (Element);
+    message: (HTMLInputElement);
+  }
+
   render() {
     return (
       <div>
         <h1>Hello from {this.props.compiler} and {this.props.framework}!</h1>
         <input ref='message'/>
-        <button onClick={this.props.onClick}>click</button>
+        <button onClick={this.onClick}>click</button>
       </div>
     );
+  }
+
+  onClick() {
+    let message = this.refs.message.value;
+    this.props.changeMessage(message);
   }
 }
 
@@ -28,13 +45,9 @@ function mapStateToProps(state: any) {
   };
 };
 
-function mapDispatchToProps(dispatch: Function) {
-  return {
-    onClick: () => {
-      dispatch(changeMessage('hi'));
-    }
-  };
-}
+const mapDispatchToProps = {
+  changeMessage
+};
 
 // See http://stackoverflow.com/questions/38243652/react-redux-connect-issues-in-typescript
 export default connect<{}, {}, HelloProps>(mapStateToProps, mapDispatchToProps)(Hello);
