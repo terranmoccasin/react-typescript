@@ -16,4 +16,3 @@ gulp.task('build', function() {
       .pipe(gulpWebpack(require('./webpack.config.js'), webpack))
       .pipe(gulp.dest('./dist/js'));
 });
--
