@@ -2,21 +2,15 @@ import {SagaIterator} from 'redux-saga';
 import { delay } from 'redux-saga'
 import { put, takeEvery } from 'redux-saga/effects'
 import {SAMPLE_ACTION} from '../constants/ActionTypes';
+import {changeMessage} from '../actions/SampleActions';
 
-
-function* helloSaga(): any {
-  console.log('Hello Sagas!')
+function* changeMessageSaga() {
+  yield delay(1000);
+  yield put(changeMessage('hi'));
 }
 
-// Our worker Saga: will perform the async increment task
-function* incrementAsync() {
-  yield delay(1000)
-  yield put({ type: 'INCREMENT' })
-}
-
-// Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
 function* watchIncrementAsync() {
-  yield takeEvery('INCREMENT_ASYNC', incrementAsync)
+  yield takeEvery(SAMPLE_ACTION, changeMessageSaga)
 }
 
 // single entry point to start all Sagas at once

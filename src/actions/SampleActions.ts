@@ -1,15 +1,17 @@
-import {SAMPLE_ACTION} from '../constants/ActionTypes';
-
-interface Action<P> {
-  type: string,
-  payload: P,
-  error?: boolean,
-  meta?: Object
+export interface ChangeMessageAction {
+  type: 'App/CHANGE_MESSAGE',
+  payload: string
 }
 
-export const changeMessage = (message: string): Action<string> => {
-  return {
-    type: SAMPLE_ACTION,
-    payload: message
-  };
-};
+export function changeMessage(message: string): ChangeMessageAction {
+  return {type: 'App/CHANGE_MESSAGE', payload: message};
+}
+
+export type ChangeMessageAsyncType = 'App/CHANGE_MESSAGE_ASYNC';
+export interface ChangeMessageAsyncAction {
+  type: ChangeMessageAsyncType
+}
+
+export function changeMessageAsync(): ChangeMessageAsyncAction {
+  return {type: 'App/CHANGE_MESSAGE_ASYNC'};
+}

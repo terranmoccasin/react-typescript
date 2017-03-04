@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {connect} from 'react-redux'
-import {changeMessage} from '../actions/SampleActions';
+import {changeMessageAsync} from '../actions/SampleActions';
 
 interface HelloProps {
   compiler: string
   framework: string;
-  changeMessage?: (message: string) => void;
+  changeMessageAsync?: () => void;
 }
 
 // 'HelloProps' describes the shape of props.
@@ -35,7 +35,7 @@ class Hello extends React.Component<HelloProps, undefined> {
 
   onClick() {
     let message = this.refs.message.value;
-    this.props.changeMessage(message);
+    this.props.changeMessageAsync();
   }
 }
 
@@ -46,7 +46,7 @@ function mapStateToProps(state: any) {
 };
 
 const mapDispatchToProps = {
-  changeMessage
+  changeMessageAsync
 };
 
 // See http://stackoverflow.com/questions/38243652/react-redux-connect-issues-in-typescript
