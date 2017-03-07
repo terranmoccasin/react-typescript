@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {connect} from 'react-redux'
-import {changeMessageAsync} from '../actions/SampleActions';
+import {changeMessage} from '../actions/SampleActions';
 
-interface HelloProps {
+interface Props {
   compiler: string
   framework: string;
-  changeMessageAsync?: () => void;
+  changeMessage?: (message: string) => any;
 }
 
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the 'undefined' type.
-class Hello extends React.Component<HelloProps, undefined> {
-  constructor(props: HelloProps) {
+class RootComponent extends React.Component<Props, undefined> {
+  constructor(props: Props) {
     super(props);
     this.onClick = this.onClick.bind(this);
   }
@@ -35,19 +35,19 @@ class Hello extends React.Component<HelloProps, undefined> {
 
   onClick() {
     let message = this.refs.message.value;
-    this.props.changeMessageAsync();
+    this.props.changeMessage(message);
   }
 }
 
 function mapStateToProps(state: any) {
   return {
-    framework: state
+    framework: state.changeMessage.message
   };
 };
 
 const mapDispatchToProps = {
-  changeMessageAsync
+  changeMessage
 };
 
 // See http://stackoverflow.com/questions/38243652/react-redux-connect-issues-in-typescript
-export default connect<{}, {}, HelloProps>(mapStateToProps, mapDispatchToProps)(Hello);
+export default connect<{}, {}, Props>(mapStateToProps, mapDispatchToProps)(RootComponent);

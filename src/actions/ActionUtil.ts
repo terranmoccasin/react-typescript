@@ -1,17 +1,22 @@
 export interface Action<P> {
-  readonly type: string,
-  readonly payload: P,
-  readonly error?: boolean,
-  readonly meta?: Object
+  type: any
+  payload?: P
 }
 
-interface ActionCreator<P> {
-  readonly type: string
-  (payload: P): Action<P>
+let typeCache: { [label: string]: boolean } = {};
+export function type<T>(label: T | ''): T {
+  // this actually checks whether your action type
+  // name is unique!
+  if (typeCache[<string>label]) {
+    throw new Error(`Action type "${label}" is not unqiue"`);
+  }
+
+  typeCache[<string>label] = true;
+
+  return <T>label;
 }
 
-export const actionCreator = <P>(type: string): ActionCreator<P> =>
-  Object.assign((payload: P):any => ({type, payload}), {type})
-
-export const isType = <P>(action: Action<any>, actionCreator: ActionCreator<P>):
-  action is Action<P> => action.type === actionCreator.type
+export const ActionTypes = {
+  CHANGE_MESSAGE_START: type<'CHANGE_MESSAGE_START'>('CHANGE_MESSAGE_START'),
+  CHANGE_MESSAGE_DONE: type<'CHANGE_MESSAGE_DONE'>('CHANGE_MESSAGE_DONE')
+}

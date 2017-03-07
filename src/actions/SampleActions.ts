@@ -1,17 +1,19 @@
-export interface ChangeMessageAction {
-  type: 'App/CHANGE_MESSAGE',
+import {CHANGE_MESSAGE_START} from '../constants/ActionTypes';
+import {ActionTypes, Action} from './ActionUtil';
+
+export class ChangeMessageStart implements Action<string> {
+  type = ActionTypes.CHANGE_MESSAGE_START
   payload: string
 }
 
-export function changeMessage(message: string): ChangeMessageAction {
-  return {type: 'App/CHANGE_MESSAGE', payload: message};
+export const changeMessage = (message: string): Action<string> =>
+    ({type: ActionTypes.CHANGE_MESSAGE_START, payload: message});
+
+export class ChangeMessageDone implements Action<void> {
+  type = ActionTypes.CHANGE_MESSAGE_DONE
 }
 
-export type ChangeMessageAsyncType = 'App/CHANGE_MESSAGE_ASYNC';
-export interface ChangeMessageAsyncAction {
-  type: ChangeMessageAsyncType
-}
+export const changeMessageDone = (): Action<void> =>
+    ({type: ActionTypes.CHANGE_MESSAGE_DONE});
 
-export function changeMessageAsync(): ChangeMessageAsyncAction {
-  return {type: 'App/CHANGE_MESSAGE_ASYNC'};
-}
+export type ChangeMessageActions = ChangeMessageStart | ChangeMessageDone;

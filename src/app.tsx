@@ -4,14 +4,14 @@ import * as ReactDOM from 'react-dom';
 import Hello from './components/Hello';
 
 import { createStore, applyMiddleware } from 'redux';
-import sampleReducer from './reducers/SampleReducer';
+import { createEpicMiddleware } from 'redux-observable';
+import rootReducer from './reducers/RootReducer';
+import rootEpic from './epics/RootEpic';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga'
-import RootSaga from './sagas/RootSaga'
 
-const sagaMiddleware = createSagaMiddleware()
-let store = createStore(sampleReducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(RootSaga);
+const epicMiddleware = createEpicMiddleware(rootEpic);
+
+const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
 
 ReactDOM.render(
   <Provider store={store}>
